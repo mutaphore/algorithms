@@ -62,7 +62,7 @@ def heap_sort(A):
     build_max_heap(A)
     for i in reversed(range(1, len(A) + 1)):
         A[1], A[i] = A[i], A[1]
-        A.heap_size = A.heap_size - 1
+        A.heap_size -= 1
         max_heapify(A, 1)
 
 
@@ -70,15 +70,21 @@ def heap_max(A):
     return A[1]
 
 
-def heap_extract_max
-
+def heap_extract_max(A):
+    if A.heap_size < 1:
+        raise IndexError
+    heap_max = A[1]
+    A[1] = A[A.heap_size]
+    A.heap_size -= 1
+    return heap_max
 
 if __name__ == "__main__":
     heap = Heap([4, 1, 3, 2, 16, 9, 10, 14, 8, 7])
     build_max_heap(heap)
     print "Max heap %r" % heap
     print "Heap max is %r" % heap_max(heap)
-    heap_sort(heap)
-    print "Sorted array %r" % heap
+    
+#    heap_sort(heap)
+#    print "Sorted array %r" % heap
 
 
