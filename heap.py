@@ -5,8 +5,10 @@ class Heap(object):
 
     def __init__(self, arr):
         self._heap = arr
-        
+        self.heap_size = len(self._heap)
+        self.length = len(self._heap)
     
+
     def __len__(self):
         return len(self._heap)
 
@@ -40,26 +42,43 @@ def max_heapify(A, i):
     left = 2 * i
     right = 2 * i + 1
     largest = i
-    if left <= len(A) and A[left] > A[i]:
+    if left <= A.heap_size and A[left] > A[i]:
         largest = left
-    if right <= len(A) and A[right] > A[largest]:
+    if right <= A.heap_size and A[right] > A[largest]:
         largest = right
     if largest != i:
         A[largest], A[i] = A[i], A[largest]
-        return max_heapify(A, largest) 
-    else:
-        return A
+        max_heapify(A, largest) 
 
 
 def build_max_heap(A):
     """Build a sorted max heap from unordered array"""
     for i in reversed(range(1, len(A) / 2 + 1)):   # Adjust for the range offset
-        A = max_heapify(A, i)
-    return A
+        max_heapify(A, i)
+
+
+def heap_sort(A):
+    """Sorts an array into increasing order"""
+    build_max_heap(A)
+    for i in reversed(range(1, len(A) + 1)):
+        A[1], A[i] = A[i], A[1]
+        A.heap_size = A.heap_size - 1
+        max_heapify(A, 1)
+
+
+def heap_max(A):
+    return A[1]
+
+
+def heap_extract_max
 
 
 if __name__ == "__main__":
     heap = Heap([4, 1, 3, 2, 16, 9, 10, 14, 8, 7])
-    max_heap = build_max_heap(heap)
-    print "Max heap %r" % max_heap
+    build_max_heap(heap)
+    print "Max heap %r" % heap
+    print "Heap max is %r" % heap_max(heap)
+    heap_sort(heap)
+    print "Sorted array %r" % heap
+
 
