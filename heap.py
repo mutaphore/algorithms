@@ -22,7 +22,7 @@ class Heap(object):
 
     
     def __setitem__(self, key, value):
-        if type(key) is not int or type(value) is not int:
+        if type(key) is not int:
             raise TypeError
         if key < 0 or key > len(self._heap):
             raise IndexError
@@ -39,6 +39,11 @@ class Heap(object):
 
     def to_arr(self):
         return self._heap
+
+    
+    def append(self, val=None):
+        self._heap.append(val)
+        self.length += 1
 
 
 def max_heapify(A, i):
@@ -93,9 +98,18 @@ def heap_increase_key(A, i, key):
     if A[i] > key:
         return        
     A[i] = key 
-    while i / 2 > 1 and A[i/2] < A[i]:
+    while i / 2 >= 1 and A[i/2] < A[i]:
         A[i/2], A[i] = A[i], A[i/2]
         i /= 2
+
+
+def max_heap_insert(A, key):
+    """Insert element with key into max heap"""
+    while A.heap_size >= len(A):
+        A.append(None)
+    A.heap_size += 1    
+    A[A.heap_size] = -float("inf")
+    heap_increase_key(A, A.heap_size, key)
 
 
 if __name__ == "__main__":
@@ -106,9 +120,13 @@ if __name__ == "__main__":
     print "Max heap %r" % heap
     heap_increase_key(heap, 8, 11)
     print "Heap increase key %r" % heap
+    max_heap_insert(heap, 19)
+    max_heap_insert(heap, 16)
+    max_heap_insert(heap, 15)
+    print "Max heap insert %r" % heap
 
     arr = [4, 1, 3, 2, 16, 9, 10, 14, 8, 7]
     sorted_arr = heap_sort(arr)
-    print "Sorted array %r" % sorted_arr
+    print "Heap sorted array %r" % sorted_arr
 
 
