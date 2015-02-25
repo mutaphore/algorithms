@@ -1,5 +1,7 @@
 #!/usr/bin/python2
 
+import random
+
 def bucket_sort(A, num_buckets, debug=False):
     """Bucket sort an array with num_buckets"""
     min_ = min(A)
@@ -18,6 +20,7 @@ def bucket_sort(A, num_buckets, debug=False):
      
 
 if __name__ == "__main__":
-    A = [0.78, 0.17, 0.39, 0.26, 0.72, -0.4, 0.94, 0.21, 0.12, 0.23, 0.68]
-    print bucket_sort(A, 100, debug=True)
+    N = 100
+    A = [random.uniform(0, 1) for i in range(N)]
+    bucket_sort(A, 100, debug=True)
     
