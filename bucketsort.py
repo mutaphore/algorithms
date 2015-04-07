@@ -17,7 +17,7 @@ def bucket_sort(A, num_buckets, debug=False):
         for b in B:
             print b
     return reduce(lambda x, y: x + y, B)
-     
+    
 
 if __name__ == "__main__":
     N = 100
